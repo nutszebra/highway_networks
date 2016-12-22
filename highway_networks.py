@@ -119,6 +119,8 @@ class Highway_Fitnet4(nutszebra_chainer.Model):
         for i in six.moves.range(len(self.block)):
             for ii in six.moves.range(1, self.block[i] + 1):
                 x = self['conv{}_{}'.format(i + 1, ii)](x, train)
+            if i < len(self.block) - 1:
+                x = F.max_pooling_2d(x, ksize=(2, 2), stride=(2, 2), pad=(0, 0))
         batch, channels, height, width = x.data.shape
         h = F.reshape(F.average_pooling_2d(x, (height, width)), (batch, channels, 1, 1))
         return F.reshape(self.linear(h, train), (batch, self.category_num))
