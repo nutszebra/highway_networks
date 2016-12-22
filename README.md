@@ -29,11 +29,11 @@ T is calculated by BN-ReLU-Conv(3x3)-BN-ReLU-Conv(1x1)-BN-ReLU-Conv(1x1). The we
 * Optimization  
 SGD momentum with weight decay is used.
 
-| momentum              | weight decay | initial learning rate |
-|:---------------------:|:------------:|:---------------------:|
-|0.9                    |0.0001        |0.1                    |
+| momentum              | weight decay | initial learning rate | batch |
+|:---------------------:|:------------:|:---------------------:|:-----:|
+|0.9                    |0.0005        |0.1                    |128    |
 
-Learning rate is divided by 10 at [60, 120, 180] and I totally run 240 epochs. 
+Learning rate is divided by 5 at [60, 120, 160] and I totally run 200 epochs. 
 
 # Cifar10 result
 
