@@ -63,14 +63,9 @@ class Highway_Conv(nutszebra_chainer.Model):
             pad.to_gpu()
         return F.concat((x, pad))
 
-    def maybe_pooling(self, x):
-        if 2 in self.stride:
-            return F.average_pooling_2d(x, 1, 2, 0)
-        return x
-
     def __call__(self, x, train=False):
         h = self.conv(x, train)
-        x = self.concatenate_zero_pad(self.maybe_pooling(x), h.data.shape, h.volatile, type(h.data))
+        x = self.concatenate_zero_pad(x, h.data.shape, h.volatile, type(h.data))
         highway = self.conv_highway_3x3(x, train)
         highway = self.conv_highway_1x1_1(highway, train)
         highway = F.sigmoid(self.conv_highway_1x1_2(highway, train))
