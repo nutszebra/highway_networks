@@ -24,8 +24,12 @@ Fitnet4 as [[1]][Paper]] said.
 All conv layers are BN-ReLU-Conv
 
 * T  
-T is calculated by BN-ReLU-Conv(3x3)-BN-ReLU-Conv(1x1)-BN-ReLU-Conv(1x1). The weights of all convs on T are initialized to 0 and all bisas are initialized to -1.
+y = F(x)T(x) - x(1 - T(x))  
+x: input  
+F(x): non-linear function  
+T(x): This fucntion is 0 <= T(x) <= 1  
 
+T is calculated by BN-ReLU-Conv(3x3)-BN-ReLU-Conv(1x1)-BN-ReLU-Conv(1x1). The weights of all convs on T are initialized to 0 and all bisas are initialized to -1.　The dimension of T(x) is same as F(x).
 * Optimization  
 SGD momentum with weight decay is used.
 
